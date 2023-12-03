@@ -34,12 +34,12 @@ class NewsScreenActivity : AppCompatActivity() {
         newsListView()
 
     }
-    fun newsListView(){
+    fun newsListView() {
 
         val params: MutableMap<String, String> = HashMap()
         params.put("format", "json")
         params.put("limit", "20")
-        params.put("offset", "0")
+        params.put("offset", "1")
 
         val apiService: ApiInterface = ApiClient.getResponse().create<ApiInterface>(
             ApiInterface::class.java
