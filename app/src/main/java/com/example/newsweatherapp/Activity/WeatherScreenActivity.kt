@@ -109,6 +109,7 @@ class WeatherScreenActivity : AppCompatActivity() {
                 findViewById<RelativeLayout>(R.id.mainContainer).visibility = View.VISIBLE
 
             } catch (e: Exception) {
+
                 findViewById<ProgressBar>(R.id.loader).visibility = View.GONE
                 findViewById<TextView>(R.id.errortext).visibility = View.VISIBLE
             }
