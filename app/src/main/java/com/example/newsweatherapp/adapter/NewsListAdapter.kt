@@ -10,10 +10,10 @@ import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.SearchView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newsweatherapp.Activity.NewWebViewActivity
-import com.example.newsweatherapp.Activity.NewsScreenActivity
 import com.example.newsweatherapp.Model.NewsListResponseModel
 import com.example.newsweatherapp.R
 import com.squareup.picasso.Picasso
@@ -21,7 +21,9 @@ import com.squareup.picasso.Picasso
 
 internal class NewsListAdapter(
     private val context: Context,
-    private var newsList: List<NewsListResponseModel.NewsList?>
+    private var newsList: List<NewsListResponseModel.NewsList?>,
+    private var originalNewsList: List<NewsListResponseModel.NewsList?>,
+    private var searchView: SearchView
 ) :
     RecyclerView.Adapter<NewsListAdapter.MyViewHolder>() {
 
@@ -47,6 +49,21 @@ internal class NewsListAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
         Log.d("gokulnathan"," " + newsList.size);
+
+        searchView.setOnClickListener(View.OnClickListener { searchView.onActionViewExpanded() })
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                filter(newText)
+                return true
+            }
+        })
+
+
 
         holder.titleTextView.text = newsList.get(position)!!.getTitle()
         holder.descriptionTextView.text =  newsList.get(position)!!.getSummary()
@@ -89,6 +106,24 @@ internal class NewsListAdapter(
 
 
     }
+
+    private fun filter(query: String?) {
+        val filteredList = mutableListOf<NewsListResponseModel.NewsList?>()
+        if (!query.isNullOrBlank()) {
+            for (item in originalNewsList) {
+                if (item?.getTitle()?.contains(query, true) == true ||
+                    item?.getSummary()?.contains(query, true) == true
+                ) {
+                    filteredList.add(item)
+                }
+            }
+        } else {
+            filteredList.addAll(originalNewsList)
+        }
+        newsList = filteredList
+        notifyDataSetChanged()
+    }
+
     override fun getItemCount(): Int {
 
         return newsList.size

@@ -3,8 +3,7 @@ package com.example.newsweatherapp.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.TextView
+import android.widget.SearchView
 import androidx.appcompat.app.ActionBar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +20,7 @@ import retrofit2.Response
 class NewsScreenActivity : AppCompatActivity() {
 
     private lateinit var newsListRecyclerView: RecyclerView
+    private lateinit var searchView: SearchView
     private lateinit var newsListAdapter: NewsListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,8 +30,18 @@ class NewsScreenActivity : AppCompatActivity() {
         setContentView(R.layout.activity_news_screen)
 
         newsListRecyclerView = findViewById<RecyclerView>(R.id.newsListRecyclerView)
+        searchView = findViewById<SearchView>(R.id.searchView)
 
         newsListView()
+
+
+
+
+
+
+
+
+
 
     }
     fun newsListView() {
@@ -60,7 +70,7 @@ class NewsScreenActivity : AppCompatActivity() {
                     Log.e("NewsList", Gson().toJson(response.body()))
                     Log.d("sjdbdbvbdfvbdvbsb", "" + response.body()!!.getResult()!!.size)
 
-                    newsListAdapter = NewsListAdapter(this@NewsScreenActivity, response.body()!!.getResult()!!)
+                    newsListAdapter = NewsListAdapter(this@NewsScreenActivity, response.body()!!.getResult()!!, response.body()!!.getResult()!!,searchView)
                     val layoutManagerpayment = LinearLayoutManager(applicationContext,
                         LinearLayoutManager.VERTICAL,false)
                     newsListRecyclerView.layoutManager = layoutManagerpayment
@@ -79,4 +89,7 @@ class NewsScreenActivity : AppCompatActivity() {
 
 
     }
+
+
+
 }
