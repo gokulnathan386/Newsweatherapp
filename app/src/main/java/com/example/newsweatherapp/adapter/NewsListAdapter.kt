@@ -12,6 +12,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.SearchView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newsweatherapp.Activity.NewWebViewActivity
 import com.example.newsweatherapp.Model.NewsListResponseModel
@@ -48,8 +49,6 @@ internal class NewsListAdapter(
     }
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
-        Log.d("gokulnathan"," " + newsList.size);
-
         searchView.setOnClickListener(View.OnClickListener { searchView.onActionViewExpanded() })
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -74,9 +73,9 @@ internal class NewsListAdapter(
             .into(holder.img)
 
         holder.layoutTxt.setOnClickListener{
-            val i = Intent(context, NewWebViewActivity::class.java)
-            i.putExtra("URL", newsList[position]?.getURL())
-            context.startActivity(i)
+              val i = Intent(context, NewWebViewActivity::class.java)
+              i.putExtra("URL", newsList[position]?.getURL())
+              context.startActivity(i)
         }
 
 
@@ -96,13 +95,6 @@ internal class NewsListAdapter(
             }
         })
 
-
-       /* if(position == getItemCount() - 1 ){
-             Log.d("lastpositionItem","askcnasncnasckjasncjnc")
-            if (context is NewsScreenActivity) {
-               // (context as NewsScreenActivity).newsListView(50)
-            }
-        }*/
 
 
     }

@@ -9,6 +9,14 @@ class NewsListResponseModel {
     @Expose
     private var count: Int? = null
 
+    @SerializedName("next")
+    @Expose
+    private var next: String? = null
+
+    @SerializedName("previous")
+    @Expose
+    private var previous: String? = null
+
     @SerializedName("results")
     @Expose
     private var results: List<NewsList>? = null
@@ -29,6 +37,22 @@ class NewsListResponseModel {
      fun setResult(results: List<NewsList>) {
         this.results = results
      }
+
+    fun getNext(): String? {
+        return next
+    }
+
+    fun setNext(next: String) {
+        this.next = next
+    }
+
+    fun getPrevious(): String? {
+        return previous
+    }
+
+    fun setPrevious(previous: String) {
+        this.previous = previous
+    }
 
 
     class NewsList {
