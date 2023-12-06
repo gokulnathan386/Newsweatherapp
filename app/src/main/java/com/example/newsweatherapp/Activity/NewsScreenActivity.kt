@@ -145,7 +145,6 @@ class NewsScreenActivity : AppCompatActivity() {
 
             }
         })
-
     }
 
     fun getParameterValue(url: String, parameterName: String): String? {
