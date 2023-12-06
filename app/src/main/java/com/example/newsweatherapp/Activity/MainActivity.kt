@@ -2,6 +2,7 @@ package com.example.newsweatherapp.Activity
 
 
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -30,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     private  val LOCATION_PERMISSION_REQUEST_CODE = 123
 
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         val actionBar: ActionBar? = supportActionBar
         actionBar!!.hide()

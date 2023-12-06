@@ -31,11 +31,11 @@ class NewsScreenActivity : AppCompatActivity() {
     private var offset = 0
     private var limit = 20
     private var k:Int = 1
-    private lateinit var nextlimit:String
-    private lateinit var nectoffset:String
+    var nextlimit: String? = null
+    var nectoffset:String? = null
 
-    private lateinit var previouslimit:String
-    private lateinit var previousoffset:String
+    var previouslimit:String? = null
+    var previousoffset:String? = null
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,16 +53,16 @@ class NewsScreenActivity : AppCompatActivity() {
 
 
         nextbtn.setOnClickListener{
-            limit = nextlimit.toInt()
-            offset = nectoffset.toInt()
+            limit = nextlimit!!.toInt()
+            offset = nectoffset!!.toInt()
             k=1
             newsListView()
         }
 
         privbtn.setOnClickListener{
             Log.d("dvmdvdvmdfmvf","" + previousoffset)
-            limit = previouslimit.toInt()
-            offset = previousoffset.toInt()
+            limit = previouslimit!!.toInt()
+            offset = previousoffset!!.toInt()
             newsListView()
         }
 

@@ -22,7 +22,7 @@ import java.util.*
 
 class WeatherScreenActivity : AppCompatActivity() {
 
-    //var currentlocationaddress:String = "Tiruvannamalai"
+
      val API:String = "b22d246bb30aa447950e964107c17808"
      var longitude:Double?=null
      var latitude:Double?=null
@@ -33,7 +33,6 @@ class WeatherScreenActivity : AppCompatActivity() {
         actionBar!!.hide()
         setContentView(R.layout.activity_weather_screen)
         val intent = intent
-       //  currentlocationaddress = intent.extras!!.getString("State")!! + "," + intent.extras!!.getString("country")!!
         longitude = intent.extras!!.getDouble("longitude")!!
         latitude =  intent.extras!!.getDouble("latitude")!!
 
@@ -85,11 +84,6 @@ class WeatherScreenActivity : AppCompatActivity() {
                 val address = jsonObj.getString("name")+", "+sys.getString("country")
 
 
-
-                val iconCode = weather.getString("icon")
-                val iconResourceId = getWeatherIconResourceId(iconCode)
-                findViewById<ImageView>(R.id.weather_icon).setImageResource(iconResourceId)
-
                 findViewById<TextView>(R.id.address).text = address
                 findViewById<TextView>(R.id.updated_at).text =  updatedAtText
                 findViewById<TextView>(R.id.status).text = weatherDescription.capitalize()
@@ -117,12 +111,5 @@ class WeatherScreenActivity : AppCompatActivity() {
         }
     }
 
-    fun getWeatherIconResourceId(iconCode: String): Int {
-        when (iconCode) {
-            "01d" -> return R.drawable.ic_clear_sky_day
-            "01n" -> return R.drawable.ic_clear_sky_night
-           // else -> return R.drawable.ic_default_weather_icon
-            else -> return R.drawable.ic_clear_sky_night
-        }
-    }
+
 }

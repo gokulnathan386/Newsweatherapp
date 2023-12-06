@@ -52,11 +52,6 @@ tools:context=".Activity.WeatherScreenActivity">
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/weather_icon"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-               />
 
             <TextView
                 android:id="@+id/status"
@@ -70,7 +65,7 @@ tools:context=".Activity.WeatherScreenActivity">
 
             <TextView
                 android:id="@+id/temp"
-                android:textSize="90sp"
+                android:textSize="80sp"
                 android:text="24 °C"
                 android:layout_gravity="center"
                 android:textColor="@color/white"

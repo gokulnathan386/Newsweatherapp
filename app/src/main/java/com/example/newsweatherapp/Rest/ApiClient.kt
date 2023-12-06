@@ -32,7 +32,7 @@ object ApiClient {
                     .client(okHttpClient)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
-              //  Log.e("ctdctftygfyhuihjio", "" + retrofit.baseUrl())
+
             }
             return retrofit
         }
