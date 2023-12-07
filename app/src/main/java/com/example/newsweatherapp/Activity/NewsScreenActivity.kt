@@ -62,7 +62,9 @@ class NewsScreenActivity : AppCompatActivity() {
         privbtn.setOnClickListener{
             Log.d("dvmdvdvmdfmvf","" + previousoffset)
             limit = previouslimit!!.toInt()
-            offset = previousoffset!!.toInt()
+            if(previousoffset != null){
+                offset = previousoffset!!.toInt()
+            }
             newsListView()
         }
 
@@ -132,11 +134,11 @@ class NewsScreenActivity : AppCompatActivity() {
                         nextbtn.visibility = View.VISIBLE
                     }
 
-                        newsListAdapter = NewsListAdapter(this@NewsScreenActivity, response.body()!!.getResult()!!,response.body()!!.getResult()!!,searchView)
-                        layoutManagerpayment = LinearLayoutManager(this@NewsScreenActivity,
-                            LinearLayoutManager.VERTICAL,false)
-                        newsListRecyclerView.layoutManager = layoutManagerpayment
-                        newsListRecyclerView.adapter = newsListAdapter
+                    newsListAdapter = NewsListAdapter(this@NewsScreenActivity, response.body()!!.getResult()!!,response.body()!!.getResult()!!,searchView)
+                    layoutManagerpayment = LinearLayoutManager(this@NewsScreenActivity,
+                        LinearLayoutManager.VERTICAL,false)
+                    newsListRecyclerView.layoutManager = layoutManagerpayment
+                    newsListRecyclerView.adapter = newsListAdapter
 
                 }
             }
@@ -145,6 +147,7 @@ class NewsScreenActivity : AppCompatActivity() {
 
             }
         })
+
     }
 
     fun getParameterValue(url: String, parameterName: String): String? {

@@ -15,6 +15,11 @@ import androidx.appcompat.app.ActionBar
 
 import com.example.newsweatherapp.R
 import org.json.JSONObject
+import java.io.BufferedInputStream
+import java.io.BufferedReader
+import java.io.InputStream
+import java.io.InputStreamReader
+import java.net.HttpURLConnection
 import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
@@ -37,6 +42,7 @@ class WeatherScreenActivity : AppCompatActivity() {
         latitude =  intent.extras!!.getDouble("latitude")!!
 
         weatherTask().execute()
+        AirQualityTask().execute()
 
     }
 
@@ -110,6 +116,41 @@ class WeatherScreenActivity : AppCompatActivity() {
 
         }
     }
+
+
+    inner class AirQualityTask() : AsyncTask<String, Void, String>() {
+
+        override fun doInBackground(vararg params: String?): String? {
+            var response: String?
+            try {
+                response =
+                    URL("https://api.openweathermap.org/data/2.5/air_pollution?lat=${latitude}&lon=${longitude}&APPID=$API")
+                        .readText(Charsets.UTF_8)
+            } catch (e: Exception) {
+                response = null
+            }
+            return response
+        }
+
+        override fun onPostExecute(result: String?) {
+            super.onPostExecute(result)
+            try {
+                val jsonObj = JSONObject(result)
+
+                val listArray = jsonObj.getJSONArray("list")
+                val airQuality = listArray.getJSONObject(0).getJSONObject("main")
+
+                val aqi = airQuality.getInt("aqi")
+
+                findViewById<TextView>(R.id.airQuality).text = "Air Quality\n $aqi"
+
+            } catch (e: Exception) {
+                findViewById<TextView>(R.id.errortext).visibility = View.VISIBLE
+            }
+        }
+    }
+
+
 
 
 }
